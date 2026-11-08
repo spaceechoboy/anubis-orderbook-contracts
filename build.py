@@ -2,7 +2,7 @@ import json,subprocess,os
 SOLC=[os.environ["SOLC"],"--standard-json"] if os.environ.get("SOLC") else ["node","scripts/solc.cjs"]
 def read(p): return open(p).read()
 inp={"language":"Solidity","sources":{path:{"content":read(path)} for path in (
-         "contracts/P2PEscrow.sol", "contracts/P2POrderBook.sol", "contracts/P2PTokenOrderBook.sol", "contracts/AwakeNftMarket.sol", "test/mocks/Mocks.sol", "test/mocks/TokenBookMocks.sol", "test/mocks/NftMarketMocks.sol")},
+         "contracts/P2PEscrow.sol", "contracts/P2POrderBook.sol", "contracts/P2PTokenOrderBook.sol", "contracts/AwakeNftMarket.sol", "test/mocks/Mocks.sol", "test/mocks/TokenBookMocks.sol", "test/mocks/NftMarketMocks.sol", "contracts/NoncustodialSettlement.sol", "test/mocks/SettlementMocks.sol")},
      "settings":{"optimizer":{"enabled":True,"runs":200},"evmVersion":"paris","metadata":{"bytecodeHash":"ipfs"},
                  "outputSelection":{"*":{"*":["abi","evm.bytecode.object","evm.deployedBytecode.object","evm.deployedBytecode.immutableReferences","metadata"]}}}}
 compiled=subprocess.run(SOLC,input=json.dumps(inp),capture_output=True,text=True)
@@ -18,7 +18,7 @@ for f,cs in out["contracts"].items():
         arts[name]={"abi":c["abi"],"bin":c["evm"]["bytecode"]["object"],"deployed":c["evm"]["deployedBytecode"]["object"],"immutableReferences":c["evm"]["deployedBytecode"].get("immutableReferences",{}),"metadata":c.get("metadata")}
 json.dump(arts,open("build/artifacts.json","w"))
 # 각 계약의 독립 컴파일·검증용 입력 (메타데이터 포함)
-for name in ("P2PEscrow", "P2POrderBook", "P2PTokenOrderBook", "AwakeNftMarket"):
+for name in ("P2PEscrow", "P2POrderBook", "P2PTokenOrderBook", "AwakeNftMarket", "NoncustodialSettlement"):
     path = f"contracts/{name}.sol"
     standard = {**inp, "sources": {path: inp["sources"][path]}}
     with open(f"build/{name}.standard-input.json", "w") as f:

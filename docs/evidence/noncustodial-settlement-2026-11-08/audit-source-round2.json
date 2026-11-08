@@ -1,0 +1,13 @@
+{
+  "contracts/NoncustodialSettlement.sol": "497cf914cc602c641790267c1dd3984be921f8e8d3fe9dfca13cd67bc7625c6c",
+  "test/test_noncustodial_settlement.py": "70b711afb5e2e5898aed0d518301d0ab652623333ce017e499b717ae7d4edb8a",
+  "test/test_settlement_adversarial.py": "f57669b2ccb482f71120b4192dd89b23bb8273934280bd1f7db5bf0a807a3baf",
+  "test/mocks/SettlementMocks.sol": "846bd5a9bb679e57f995717d2e9d9656a1fbde325003280db8d3f8d32890dee8",
+  "build.py": "b31e002c24170d6b0a551ac05f1a8f68a420e1d4a61472343b47ef167fd0ef71",
+  "cloudflare/invite-gate.mjs": "7a50c9adac70c813470a4b31e1ae70628bcfb24b738725e7f8e95bd3be1b14b2",
+  "terminal/invite.js": "7748d0bdc05efa44aa0d93aff934a86cbc693b1b5605680f09b79aa01634d9e0",
+  "test/invite-gate.cjs": "c6290e27718efd4421936e1f7466743c5b204577f9d636295fae3528f7405344",
+  "scripts/check-noncustodial-creation.cjs": "dbdc8fdf3a299c0c89893ac8b6afcc2fd2364da4a5a725eb69bd6718147892a3",
+  "scripts/test-settlement-mutations.py": "6b64203be2e3879feb88ece23a2f7096966f513ad887069a315fe36706491e16",
+  "docs/superpowers/specs/2026-11-08-noncustodial-invite-settlement.md": "e9de0fb9f9916fd348defb7dd2390b170a4419a278fc835d29b53ba4e4883a72"
+}

@@ -1,0 +1,1151 @@
+[
+ {
+  "inputs": [
+   {
+    "internalType": "address",
+    "name": "base",
+    "type": "address"
+   },
+   {
+    "internalType": "address",
+    "name": "quote",
+    "type": "address"
+   },
+   {
+    "internalType": "uint8",
+    "name": "precision",
+    "type": "uint8"
+   },
+   {
+    "internalType": "uint8",
+    "name": "kind",
+    "type": "uint8"
+   },
+   {
+    "internalType": "address",
+    "name": "recipient",
+    "type": "address"
+   },
+   {
+    "internalType": "bytes32",
+    "name": "deploymentId",
+    "type": "bytes32"
+   },
+   {
+    "internalType": "address",
+    "name": "gateSigner",
+    "type": "address"
+   }
+  ],
+  "stateMutability": "nonpayable",
+  "type": "constructor"
+ },
+ {
+  "inputs": [],
+  "name": "BadConfig",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "BadEpoch",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "BadFill",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "BadOrder",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "BadPermit",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "BadSignature",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "Closed",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "NonceUsed",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "NotMaker",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "PriceChanged",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "Reentrant",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "TransferFailed",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "TransferMismatch",
+  "type": "error"
+ },
+ {
+  "inputs": [],
+  "name": "WrongTaker",
+  "type": "error"
+ },
+ {
+  "anonymous": false,
+  "inputs": [
+   {
+    "indexed": true,
+    "internalType": "bytes32",
+    "name": "orderHash",
+    "type": "bytes32"
+   },
+   {
+    "indexed": true,
+    "internalType": "address",
+    "name": "maker",
+    "type": "address"
+   }
+  ],
+  "name": "Cancelled",
+  "type": "event"
+ },
+ {
+  "anonymous": false,
+  "inputs": [
+   {
+    "indexed": true,
+    "internalType": "address",
+    "name": "maker",
+    "type": "address"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint256",
+    "name": "newEpoch",
+    "type": "uint256"
+   }
+  ],
+  "name": "EpochAdvanced",
+  "type": "event"
+ },
+ {
+  "anonymous": false,
+  "inputs": [
+   {
+    "indexed": true,
+    "internalType": "bytes32",
+    "name": "orderHash",
+    "type": "bytes32"
+   },
+   {
+    "indexed": true,
+    "internalType": "address",
+    "name": "maker",
+    "type": "address"
+   },
+   {
+    "indexed": true,
+    "internalType": "address",
+    "name": "taker",
+    "type": "address"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint64",
+    "name": "fillLots",
+    "type": "uint64"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint64",
+    "name": "cumulativeLots",
+    "type": "uint64"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint256",
+    "name": "tokenId",
+    "type": "uint256"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint256",
+    "name": "gross",
+    "type": "uint256"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint256",
+    "name": "fee",
+    "type": "uint256"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint256",
+    "name": "takerDaiDebit",
+    "type": "uint256"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint256",
+    "name": "takerDaiCredit",
+    "type": "uint256"
+   },
+   {
+    "indexed": false,
+    "internalType": "bytes32",
+    "name": "permitDigest",
+    "type": "bytes32"
+   }
+  ],
+  "name": "Filled",
+  "type": "event"
+ },
+ {
+  "anonymous": false,
+  "inputs": [
+   {
+    "indexed": true,
+    "internalType": "address",
+    "name": "maker",
+    "type": "address"
+   },
+   {
+    "indexed": false,
+    "internalType": "uint256",
+    "name": "nonce",
+    "type": "uint256"
+   }
+  ],
+  "name": "NonceCancelled",
+  "type": "event"
+ },
+ {
+  "inputs": [],
+  "name": "ASSET_KIND",
+  "outputs": [
+   {
+    "internalType": "uint8",
+    "name": "",
+    "type": "uint8"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "BASE_DECIMALS",
+  "outputs": [
+   {
+    "internalType": "uint8",
+    "name": "",
+    "type": "uint8"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "BASE_TOKEN",
+  "outputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "DEPLOYMENT_ID",
+  "outputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "FEE_BPS",
+  "outputs": [
+   {
+    "internalType": "uint16",
+    "name": "",
+    "type": "uint16"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "FEE_RECIPIENT",
+  "outputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "GATE_SIGNER",
+  "outputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "LOT_SIZE",
+  "outputs": [
+   {
+    "internalType": "uint256",
+    "name": "",
+    "type": "uint256"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "MARKET_ID",
+  "outputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "MAX_ORDER_LIFETIME",
+  "outputs": [
+   {
+    "internalType": "uint256",
+    "name": "",
+    "type": "uint256"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "MAX_PERMIT_LIFETIME",
+  "outputs": [
+   {
+    "internalType": "uint256",
+    "name": "",
+    "type": "uint256"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "ORDER_TYPEHASH",
+  "outputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "PERMIT_TYPEHASH",
+  "outputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "QUOTE_TOKEN",
+  "outputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "name": "boundTaker",
+  "outputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "components": [
+     {
+      "internalType": "address",
+      "name": "maker",
+      "type": "address"
+     },
+     {
+      "internalType": "uint256",
+      "name": "makerNonce",
+      "type": "uint256"
+     },
+     {
+      "internalType": "uint256",
+      "name": "makerEpoch",
+      "type": "uint256"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "marketId",
+      "type": "bytes32"
+     },
+     {
+      "internalType": "uint8",
+      "name": "assetKind",
+      "type": "uint8"
+     },
+     {
+      "internalType": "address",
+      "name": "baseToken",
+      "type": "address"
+     },
+     {
+      "internalType": "address",
+      "name": "quoteToken",
+      "type": "address"
+     },
+     {
+      "internalType": "uint8",
+      "name": "baseDecimals",
+      "type": "uint8"
+     },
+     {
+      "internalType": "bool",
+      "name": "buy",
+      "type": "bool"
+     },
+     {
+      "internalType": "uint64",
+      "name": "priceTicks",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "totalLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "minFillLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "bool",
+      "name": "allowPartial",
+      "type": "bool"
+     },
+     {
+      "internalType": "uint8",
+      "name": "nftMode",
+      "type": "uint8"
+     },
+     {
+      "internalType": "uint256",
+      "name": "tokenId",
+      "type": "uint256"
+     },
+     {
+      "internalType": "uint64",
+      "name": "validAfter",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "expiresAt",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint16",
+      "name": "feeBps",
+      "type": "uint16"
+     },
+     {
+      "internalType": "address",
+      "name": "feeRecipient",
+      "type": "address"
+     },
+     {
+      "internalType": "address",
+      "name": "gateSigner",
+      "type": "address"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "inviteDigest",
+      "type": "bytes32"
+     },
+     {
+      "internalType": "bool",
+      "name": "singleCounterparty",
+      "type": "bool"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "deploymentId",
+      "type": "bytes32"
+     }
+    ],
+    "internalType": "struct NoncustodialSettlement.Order",
+    "name": "order",
+    "type": "tuple"
+   }
+  ],
+  "name": "cancel",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "uint256",
+    "name": "newEpoch",
+    "type": "uint256"
+   }
+  ],
+  "name": "cancelAll",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "uint256",
+    "name": "nonce",
+    "type": "uint256"
+   }
+  ],
+  "name": "cancelNonce",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "name": "cancelled",
+  "outputs": [
+   {
+    "internalType": "bool",
+    "name": "",
+    "type": "bool"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   },
+   {
+    "internalType": "uint256",
+    "name": "",
+    "type": "uint256"
+   }
+  ],
+  "name": "cancelledNonce",
+  "outputs": [
+   {
+    "internalType": "bool",
+    "name": "",
+    "type": "bool"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [],
+  "name": "domainSeparator",
+  "outputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   }
+  ],
+  "name": "epoch",
+  "outputs": [
+   {
+    "internalType": "uint256",
+    "name": "",
+    "type": "uint256"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "components": [
+     {
+      "internalType": "address",
+      "name": "maker",
+      "type": "address"
+     },
+     {
+      "internalType": "uint256",
+      "name": "makerNonce",
+      "type": "uint256"
+     },
+     {
+      "internalType": "uint256",
+      "name": "makerEpoch",
+      "type": "uint256"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "marketId",
+      "type": "bytes32"
+     },
+     {
+      "internalType": "uint8",
+      "name": "assetKind",
+      "type": "uint8"
+     },
+     {
+      "internalType": "address",
+      "name": "baseToken",
+      "type": "address"
+     },
+     {
+      "internalType": "address",
+      "name": "quoteToken",
+      "type": "address"
+     },
+     {
+      "internalType": "uint8",
+      "name": "baseDecimals",
+      "type": "uint8"
+     },
+     {
+      "internalType": "bool",
+      "name": "buy",
+      "type": "bool"
+     },
+     {
+      "internalType": "uint64",
+      "name": "priceTicks",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "totalLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "minFillLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "bool",
+      "name": "allowPartial",
+      "type": "bool"
+     },
+     {
+      "internalType": "uint8",
+      "name": "nftMode",
+      "type": "uint8"
+     },
+     {
+      "internalType": "uint256",
+      "name": "tokenId",
+      "type": "uint256"
+     },
+     {
+      "internalType": "uint64",
+      "name": "validAfter",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "expiresAt",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint16",
+      "name": "feeBps",
+      "type": "uint16"
+     },
+     {
+      "internalType": "address",
+      "name": "feeRecipient",
+      "type": "address"
+     },
+     {
+      "internalType": "address",
+      "name": "gateSigner",
+      "type": "address"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "inviteDigest",
+      "type": "bytes32"
+     },
+     {
+      "internalType": "bool",
+      "name": "singleCounterparty",
+      "type": "bool"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "deploymentId",
+      "type": "bytes32"
+     }
+    ],
+    "internalType": "struct NoncustodialSettlement.Order",
+    "name": "order",
+    "type": "tuple"
+   },
+   {
+    "internalType": "bytes",
+    "name": "makerSignature",
+    "type": "bytes"
+   },
+   {
+    "components": [
+     {
+      "internalType": "bytes32",
+      "name": "orderHash",
+      "type": "bytes32"
+     },
+     {
+      "internalType": "address",
+      "name": "taker",
+      "type": "address"
+     },
+     {
+      "internalType": "uint64",
+      "name": "fillLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "expectedFilledLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint256",
+      "name": "permitNonce",
+      "type": "uint256"
+     },
+     {
+      "internalType": "uint64",
+      "name": "issuedAt",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "expiresAt",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint256",
+      "name": "chainId",
+      "type": "uint256"
+     },
+     {
+      "internalType": "address",
+      "name": "verifyingContract",
+      "type": "address"
+     },
+     {
+      "internalType": "uint256",
+      "name": "tokenId",
+      "type": "uint256"
+     }
+    ],
+    "internalType": "struct NoncustodialSettlement.GatePermit",
+    "name": "permit",
+    "type": "tuple"
+   },
+   {
+    "internalType": "bytes",
+    "name": "gateSignature",
+    "type": "bytes"
+   },
+   {
+    "internalType": "uint256",
+    "name": "maxDebit",
+    "type": "uint256"
+   },
+   {
+    "internalType": "uint256",
+    "name": "minNet",
+    "type": "uint256"
+   }
+  ],
+  "name": "fill",
+  "outputs": [],
+  "stateMutability": "nonpayable",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "name": "filledLots",
+  "outputs": [
+   {
+    "internalType": "uint64",
+    "name": "",
+    "type": "uint64"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "components": [
+     {
+      "internalType": "address",
+      "name": "maker",
+      "type": "address"
+     },
+     {
+      "internalType": "uint256",
+      "name": "makerNonce",
+      "type": "uint256"
+     },
+     {
+      "internalType": "uint256",
+      "name": "makerEpoch",
+      "type": "uint256"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "marketId",
+      "type": "bytes32"
+     },
+     {
+      "internalType": "uint8",
+      "name": "assetKind",
+      "type": "uint8"
+     },
+     {
+      "internalType": "address",
+      "name": "baseToken",
+      "type": "address"
+     },
+     {
+      "internalType": "address",
+      "name": "quoteToken",
+      "type": "address"
+     },
+     {
+      "internalType": "uint8",
+      "name": "baseDecimals",
+      "type": "uint8"
+     },
+     {
+      "internalType": "bool",
+      "name": "buy",
+      "type": "bool"
+     },
+     {
+      "internalType": "uint64",
+      "name": "priceTicks",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "totalLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "minFillLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "bool",
+      "name": "allowPartial",
+      "type": "bool"
+     },
+     {
+      "internalType": "uint8",
+      "name": "nftMode",
+      "type": "uint8"
+     },
+     {
+      "internalType": "uint256",
+      "name": "tokenId",
+      "type": "uint256"
+     },
+     {
+      "internalType": "uint64",
+      "name": "validAfter",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "expiresAt",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint16",
+      "name": "feeBps",
+      "type": "uint16"
+     },
+     {
+      "internalType": "address",
+      "name": "feeRecipient",
+      "type": "address"
+     },
+     {
+      "internalType": "address",
+      "name": "gateSigner",
+      "type": "address"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "inviteDigest",
+      "type": "bytes32"
+     },
+     {
+      "internalType": "bool",
+      "name": "singleCounterparty",
+      "type": "bool"
+     },
+     {
+      "internalType": "bytes32",
+      "name": "deploymentId",
+      "type": "bytes32"
+     }
+    ],
+    "internalType": "struct NoncustodialSettlement.Order",
+    "name": "order",
+    "type": "tuple"
+   }
+  ],
+  "name": "hashOrder",
+  "outputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "components": [
+     {
+      "internalType": "bytes32",
+      "name": "orderHash",
+      "type": "bytes32"
+     },
+     {
+      "internalType": "address",
+      "name": "taker",
+      "type": "address"
+     },
+     {
+      "internalType": "uint64",
+      "name": "fillLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "expectedFilledLots",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint256",
+      "name": "permitNonce",
+      "type": "uint256"
+     },
+     {
+      "internalType": "uint64",
+      "name": "issuedAt",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint64",
+      "name": "expiresAt",
+      "type": "uint64"
+     },
+     {
+      "internalType": "uint256",
+      "name": "chainId",
+      "type": "uint256"
+     },
+     {
+      "internalType": "address",
+      "name": "verifyingContract",
+      "type": "address"
+     },
+     {
+      "internalType": "uint256",
+      "name": "tokenId",
+      "type": "uint256"
+     }
+    ],
+    "internalType": "struct NoncustodialSettlement.GatePermit",
+    "name": "permit",
+    "type": "tuple"
+   }
+  ],
+  "name": "hashPermit",
+  "outputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "address",
+    "name": "",
+    "type": "address"
+   },
+   {
+    "internalType": "uint256",
+    "name": "",
+    "type": "uint256"
+   }
+  ],
+  "name": "nonceToOrderHash",
+  "outputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ },
+ {
+  "inputs": [
+   {
+    "internalType": "bytes32",
+    "name": "",
+    "type": "bytes32"
+   }
+  ],
+  "name": "usedPermit",
+  "outputs": [
+   {
+    "internalType": "bool",
+    "name": "",
+    "type": "bool"
+   }
+  ],
+  "stateMutability": "view",
+  "type": "function"
+ }
+]

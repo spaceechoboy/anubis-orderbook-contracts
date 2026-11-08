@@ -3,5 +3,6 @@
   "contracts/AwakeNftMarket.sol": "91c53673ee042ed72eec913a7030e57540432a12fb405874eeb50a7478c6aea7",
   "contracts/P2PEscrow.sol": "16f9c2cda6218eb72bd2a24a49a29fbc91736a1747f992e49cfa9678325f9d82",
   "contracts/P2POrderBook.sol": "48ddac79329030b103f5f5cef21ca8bf8f4a27dfe74efa878362854851e6a6d8",
-  "contracts/P2PTokenOrderBook.sol": "3c37181fe94eee53a1945cec23a969b1c97535cc90cf8bfe7828898e7800f141"
+  "contracts/P2PTokenOrderBook.sol": "3c37181fe94eee53a1945cec23a969b1c97535cc90cf8bfe7828898e7800f141",
+  "contracts/NoncustodialSettlement.sol": "497cf914cc602c641790267c1dd3984be921f8e8d3fe9dfca13cd67bc7625c6c"
 }
