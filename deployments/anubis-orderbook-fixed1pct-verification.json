@@ -1,0 +1,56 @@
+{
+  "environment": "anubis-mainnet-staging",
+  "deployment": {
+    "environment": "staging",
+    "origin": "https://anubis-guide-orderbook-staging.awakeorigindirect.workers.dev",
+    "chainId": 6714,
+    "chainIdHex": "0x1a3a",
+    "signingEnabled": false,
+    "deployBlock": 18525194,
+    "deployTx": "0x02abedcf8901c13a1ca6dc14d1be0f77d3ce871588276f3544ba5388ec545b1a",
+    "runtimeKeccak": "0x01dbbe3ff6a3aba50ea8749d7c4a8f7c5093094143bccb6faecf03ee37e02f19",
+    "feeBps": 100,
+    "maxFeeBps": 100,
+    "feeChangeDelay": 0,
+    "sourceSha256": "48ddac79329030b103f5f5cef21ca8bf8f4a27dfe74efa878362854851e6a6d8",
+    "compiler": "0.8.24+commit.e11b9ed9",
+    "run": "0x02abedcf8901c13a1ca6dc14d1be0f77d3ce871588276f3544ba5388ec545b1a",
+    "address": "0x2D69c328a260f4BdabE85Ff588436DF74b9FE042",
+    "tokenA": "0x256EdB652db43E721EC6A12B6b51b6967D3bb8cB",
+    "tokenB": "0x83fd06F0846d9D90B3016bF670Efe2E0B11cDe14",
+    "feeAuthority": "0x0000000000000000000000000000000000000000",
+    "feeRecipient": "0x957295432398E16ECEF30F36367bab16499F70a1",
+    "officialAssets": true
+  },
+  "block": {
+    "number": 18525449,
+    "hash": "0xe8099094b1f70e76e3aeb41feae5473b09573e238aa0a319a9bc2dc1031c8449",
+    "timestamp": 1794060256
+  },
+  "coverage": {
+    "orders": "0",
+    "deferredPayouts": "0"
+  },
+  "fee": {
+    "activeBps": 100,
+    "maxBps": 100,
+    "delaySeconds": 0,
+    "recipient": "0x957295432398E16ECEF30F36367bab16499F70a1",
+    "authority": "0x0000000000000000000000000000000000000000",
+    "pending": null
+  },
+  "escrow": {
+    "AiLGNS": {
+      "balanceWei": "0",
+      "orderReserveWei": "0",
+      "claimableWei": "0",
+      "differenceWei": "0"
+    },
+    "DAI": {
+      "balanceWei": "0",
+      "orderReserveWei": "0",
+      "claimableWei": "0",
+      "differenceWei": "0"
+    }
+  }
+}

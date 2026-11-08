@@ -1,0 +1,23 @@
+name: Contract verification
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: npm ci --ignore-scripts
+      - run: npm run build
+      - run: npm test
+      - run: python -m pip install -r requirements.txt
+      - run: python -m unittest discover -s test -p 'test_*.py'

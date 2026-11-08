@@ -1,0 +1,21 @@
+{
+  "name": "anubis-orderbook-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "node --test test/orderbook-verification.cjs",
+    "test:contracts": "python3 -m unittest discover -s test -p 'test_*.py'",
+    "verify:deployed": "node scripts/check-orderbook-verification.cjs deployments/anubis-orderbook-fixed1pct-verification.json"
+  },
+  "devDependencies": {
+    "solc": "0.8.24",
+    "ethers": "6.13.4"
+  },
+  "overrides": {
+    "solc": {
+      "tmp": "0.2.7"
+    }
+  }
+}
